@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import './App.css';
-
+import Loader from './Loader';
+import Comment from './Comment';
+import { comment } from './interface/IComment';
 function App() {
   const { isLoading, data } = useQuery({
     queryKey: ['getAnswer'],
@@ -15,24 +17,6 @@ function App() {
     },
   });
 
-  const getDateString = (dateString: string) => {
-    const date = new Date(dateString);
-
-    const formattedDate = date
-      .toLocaleString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      })
-      .replace(/\./g, ' -')
-      .replace('T', ' ');
-
-    return formattedDate;
-  };
-
   return (
     <>
       <header className="flex justify-between mb-6">
@@ -45,29 +29,9 @@ function App() {
       </header>
       <main className="border-4 h-5/6 border-black text-left break-all p-4 mb-6 overflow-y-scroll">
         {isLoading ? (
-          <div className="flex flex-col justify-center items-center h-full">
-            <h5 className="spin text-xs">세월호 10주기 추모주간</h5>
-            <span className="spin text-[8rem]">🎗️</span>
-            <h5 className="spin text-xs">기억을 불러오는 중</h5>
-          </div>
+          <Loader />
         ) : (
-          data &&
-          data.map((item: { text: string; time: string }) => (
-            <article key={item.time}>
-              {item.text
-                .split('\n')
-                .map((line: string, idx: number, arr: string[]) => (
-                  <p key={idx}>
-                    {line}
-                    {arr.length - 1 === idx && (
-                      <span className="text-xs text-gray-500 pl-2">
-                        {getDateString(item.time)}
-                      </span>
-                    )}
-                  </p>
-                ))}
-            </article>
-          ))
+          data && data.map((item: comment) => <Comment {...item} />)
         )}
       </main>
       <div className="flex justify-end">
