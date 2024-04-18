@@ -7,6 +7,14 @@
 
 ---
 
+### 🔎 미리보기
+
+<p align='center'>
+<img src="https://github.com/gwahyun/240416-PaTI-Remember/assets/60453182/6232deb4-b623-494b-8353-a78b5cc3cddd" width="300px" align="center">
+</p>
+
+---
+
 ### 🛠️ 개발 요구 사항
 
 - [x] 구글폼으로 제출한 응답 결과를 모아 볼 수 있다
